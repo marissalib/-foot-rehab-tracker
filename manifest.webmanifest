@@ -4,6 +4,5 @@
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f1ea",
-  "theme_color": "#f5f1ea",
-  "description": "A simple personal tracker for a prescribed foot rehabilitation routine."
+  "theme_color": "#f5f1ea"
 }

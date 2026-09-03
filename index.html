@@ -10,209 +10,201 @@
 <link rel="manifest" href="manifest.webmanifest">
 <title>Foot Rehab Tracker</title>
 <style>
-:root{--bg:#f5f1ea;--card:#fffdf9;--ink:#292722;--muted:#746f66;--line:#ded8ce;--accent:#8a7655;--accent2:#eee6d7;--ok:#6d8065}
+:root{--bg:#f5f1ea;--card:#fffdf9;--ink:#292722;--muted:#746f66;--line:#ded8ce;--accent:#8a7655;--accent2:#eee6d7}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:720px;margin:auto;padding:20px 16px 40px}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{color:var(--muted);font-size:14px}.title{font-size:27px;font-weight:700;margin:2px 0}.muted{color:var(--muted);font-size:14px}.count{text-align:right}.count strong{font-size:26px}.dots{display:flex;gap:7px;margin:16px 0 4px}.dot{height:7px;flex:1;border-radius:99px;background:#ddd6ca}.dot.on{background:var(--accent)}.goal{color:var(--muted);font-size:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}.exercise{display:flex;gap:12px}.check{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:white;font-size:19px;flex:0 0 auto}.done{opacity:.6}.done .name{text-decoration:line-through}.name{font-weight:700}.pill{display:inline-block;background:var(--accent2);border-radius:999px;padding:3px 9px;font-size:12px;color:var(--muted);margin-top:5px}.desc,.tip{font-size:14px;color:var(--muted);margin:10px 0 0}.tip strong{color:var(--ink)}button{font:inherit;color:inherit;cursor:pointer}.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.timerbtn,.primary,.secondary{min-height:44px;border-radius:12px;padding:8px 14px;border:1px solid var(--line);background:white;font-weight:600}.primary{background:var(--accent);color:white;border-color:var(--accent)}.timer{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}.optional{display:flex;gap:12px;align-items:flex-start}.optional button{min-width:44px}.section-title{font-weight:700}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:14px;font-weight:600}.field input,.field textarea{width:100%;margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:white;font:inherit}.field textarea{resize:vertical}.footer-note{font-size:12px;color:var(--muted);margin-top:18px}.status{color:var(--muted);font-size:14px;margin-top:10px;min-height:20px}
-@media(max-width:480px){main{padding:16px 12px 32px}.fields{grid-template-columns:1fr}.title{font-size:24px}}
+main{max-width:720px;margin:auto;padding:20px 16px 40px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow,.muted{color:var(--muted);font-size:14px}.title{font-size:27px;font-weight:700;margin:2px 0}.count{text-align:right}.count strong{font-size:26px}.dots{display:flex;gap:7px;margin:16px 0 4px}.dot{height:7px;flex:1;border-radius:99px;background:#ddd6ca}.dot.on{background:var(--accent)}.goal{color:var(--muted);font-size:14px}.exercise{display:flex;gap:12px}.check{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:white;font-size:19px;flex:0 0 auto}.done{opacity:.6}.done .name{text-decoration:line-through}.name{font-weight:700}.pill{display:inline-block;background:var(--accent2);border-radius:999px;padding:3px 9px;font-size:12px;color:var(--muted);margin-top:5px}.desc,.tip{font-size:14px;color:var(--muted);margin:10px 0 0}.tip strong{color:var(--ink)}button{font:inherit;color:inherit;cursor:pointer}.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.timerbtn,.primary,.secondary{min-height:44px;border-radius:12px;padding:8px 14px;border:1px solid var(--line);background:white;font-weight:600}.primary{background:var(--accent);color:white;border-color:var(--accent)}.timer{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}.optional{display:flex;gap:12px;align-items:flex-start}.section-title{font-weight:700}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:14px;font-weight:600}.field input,.field textarea{width:100%;margin-top:7px;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:white;font:inherit}.field textarea{resize:vertical}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.stat{background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:12px}.stat strong{display:block;font-size:21px}.history-row{padding:12px 0;border-bottom:1px solid var(--line)}.history-row:last-child{border-bottom:0}.history-date{font-weight:700}.history-meta{font-size:13px;color:var(--muted);margin-top:3px}.footer-note{font-size:12px;color:var(--muted);margin-top:18px}
+@media(max-width:480px){main{padding:16px 12px 32px}.fields{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.title{font-size:24px}}
+</style>
+</head>
+<body>
+<main id="app">
+<section class="card" style="margin-top:0">
+<div class="top"><div><div id="date" class="eyebrow"></div><div class="title">Foot rehab</div><div id="session" class="muted"></div></div><div class="count"><strong id="count">0 / 3</strong><div class="muted">sessions today</div></div></div>
+<div class="dots"><span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
+<div id="goal" class="goal"></div>
+</section>
 
-.stats{display:grid;gri<main id="app">
-  <section class="card" style="margin-top:0">
-    <div class="top">
-      <div><div id="date" class="eyebrow"></div><div class="title">Foot rehab</div><div id="session" class="muted"></div></div>
-      <div class="count"><strong id="count">0 / 3</strong><div class="muted">sessions today</div></div>
-    </div>
-    <div class="dots"><span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div>
-    <div id="goal" class="goal"></div>
-  </section>
+<section class="card" style="display:flex;gap:8px;flex-wrap:wrap">
+<button id="todayTab" class="primary" type="button">Today</button>
+<button id="historyTab" class="secondary" type="button">History &amp; progress</button>
+</section>
 
-  <nav class="card" style="display:flex;gap:8px;flex-wrap:wrap">
-    <button id="todayTab" class="primary">Today</button>
-    <button id="historyTab" class="secondary">History & progress</button>
-  </nav>
+<div id="todayView">
+<div id="list"></div>
 
-  <div id="todayView">
-    <div id="list"></div>
+<section class="card">
+<div class="optional"><button id="ice" class="secondary" type="button" aria-pressed="false">○</button><div><div class="section-title">Optional: ice / frozen bottle</div><div class="muted">Last step. Ice your feet or gently roll a frozen water bottle under your feet.</div></div></div>
+</section>
 
-    <section class="card">
-      <div class="optional">
-        <button id="ice" class="secondary" aria-pressed="false">○</button>
-        <div><div class="section-title">Optional: ice / frozen bottle</div><div class="muted">Last step. Ice your feet or gently roll a frozen water bottle under your feet.</div></div>
-      </div>
-    </section>
+<section class="card">
+<div class="section-title">How does your foot feel?</div><div class="muted">Rate pain at the end of the session.</div>
+<div class="fields" style="margin-top:12px">
+<div class="field"><label for="before">Pain before</label><input id="before" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
+<div class="field"><label for="after">Pain after</label><input id="after" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
+</div>
+</section>
 
-    <section class="card">
-      <div class="section-title">How does your foot feel?</div>
-      <div class="muted">Rate pain at the end of the session.</div>
-      <div class="fields" style="margin-top:12px">
-        <div class="field"><label for="before">Pain before</label><input id="before" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
-        <div class="field"><label for="after">Pain after</label><input id="after" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
-      </div>
-    </section>
+<section class="card">
+<div class="section-title">Session notes</div><div class="field"><textarea id="notes" rows="3" placeholder="Anything worth remembering?"></textarea></div>
+<div class="actions"><button id="finish" class="primary" type="button">Finish session</button><button id="reset" class="secondary" type="button">Reset session</button><button id="export" class="secondary" type="button">Export data</button></div>
+<div id="status" class="status muted" aria-live="polite"></div>
+</section>
 
-    <section class="card">
-      <div class="section-title">Session notes</div>
-      <div class="field"><textarea id="notes" rows="3" placeholder="Anything worth remembering?"></textarea></div>
-      <div class="actions"><button id="finish" class="primary">Finish session</button><button id="reset" class="secondary">Reset session</button><button id="export" class="secondary">Export data</button></div>
-      <div id="status" class="status" aria-live="polite"></div>
-    </section>
+<section class="card"><div class="section-title">Your prescription</div><div class="muted" style="margin-top:8px">Stretches: 3 × 30 sec · Other exercises: 1–2 × 2 min · Frequency: 2–3× daily</div></section>
+</div>
 
-    <section class="card">
-      <div class="section-title">Your prescription</div>
-      <div class="muted" style="margin-top:8px">Stretches: 3 × 30 sec · Other exercises: 1–2 × 2 min · Frequency: 2–3× daily</div>
-    </section>
-  </div>
+<div id="historyView" style="display:none">
+<section class="card"><div class="section-title">Progress</div><div id="summary" class="stats"></div></section>
+<section class="card"><div class="section-title">Recent sessions</div><div id="history"></div></section>
+</div>
 
-  <div id="historyView" style="display:none">
-    <section class="card">
-      <div class="section-title">Progress</div>
-      <div id="summary" class="stats"></div>
-    </section>
-    <section class="card">
-      <div class="section-title">Recent sessions</div>
-      <div id="history"></div>
-    </section>
-  </div>
-
-  <div class="footer-note">This tracker records what you enter; it does not replace your PT's instructions. Stop an exercise if it causes pain or discomfort and contact your healthcare provider as directed on your PT sheet.</div>
-</main>"status" aria-live="polite"></div>
-  </section>
-
-  <section class="card">
-    <div class="section-title">Your prescription</div>
-    <div class="muted" style="margin-top:8px">Stretches: 3 × 30 sec · Other exercises: 1–2 × 2 min · Frequency: 2–3× daily</div>
-  </section>
-  <div class="footer-note">This tracker records what you enter; it does not replace your PT's instructions. Stop an exercise if it causes pain or discomfort and contact your healthcare provider as directed on your PT sheet.</div>
+<div class="footer-note">This tracker records what you enter; it does not replace your PT's instructions.</div>
 </main>
+
 <script>
-const exercises=[
-["Gastrocnemius Stretch on Wall",3,30,"stretch","Stand facing a wall. Extend one leg straight backward, bend the front knee, and keep the back heel down and knee straight.","Keep both heels on the ground and the back knee straight."],
-["Soleus Stretch on Wall",3,30,"stretch","Stand facing a wall with one leg back and the back knee bent. Lean forward until you feel the lower-calf stretch.","Keep both heels down and the back knee bent."],
-["Arch Lifting",2,120,"strength / mobility","In a staggered stance, lift the arch while keeping your toes and heel in contact with the ground.","Avoid gripping with your toes."],
-["Towel Scrunches",2,120,"strength / mobility","Sit with a towel under your foot. Scrunch it toward you with your toes, flatten it, and repeat.","Keep the rest of your foot in contact with the ground."],
-["Toe Yoga — Alternating Great and Lesser Toe Extension",2,120,"strength / mobility","With your foot bare and flat, alternate lifting the big toe while the others stay down, then the four smaller toes while the big toe stays down.","Keep the arch active and avoid digging your toes into the ground."],
-["Toe Spreading",2,120,"strength / mobility","Stand with feet shoulder-width apart and gently spread your toes while keeping the foot grounded.","Keep the foot in contact with the ground."],
-["Seated Plantar Fascia Stretch",3,30,"stretch","Sit with one leg crossed over the other knee. Hold your heel and toes, then gently pull the toes backward.","Keep the stretch slow and controlled."],
-["Seated Plantar Fascia Mobilization with Small Ball",2,120,"mobility","Sit with your foot on a small ball. Gently roll the middle of your foot forward and backward between the ball of the foot and heel.","Use enough pressure to feel a stretch, not pain."]
+(function(){
+"use strict";
+
+const EXERCISES=[
+{name:"Gastrocnemius Stretch on Wall",sets:3,seconds:30,type:"stretch",desc:"Stand facing a wall. Extend one leg straight backward, bend the front knee, and keep the back heel down and knee straight.",tip:"Keep both heels on the ground and the back knee straight."},
+{name:"Soleus Stretch on Wall",sets:3,seconds:30,type:"stretch",desc:"Stand facing a wall with one leg back and the back knee bent. Lean forward until you feel the lower-calf stretch.",tip:"Keep both heels down and the back knee bent."},
+{name:"Arch Lifting",sets:2,seconds:120,type:"strength / mobility",desc:"In a staggered stance, lift the arch while keeping your toes and heel in contact with the ground.",tip:"Avoid gripping with your toes."},
+{name:"Towel Scrunches",sets:2,seconds:120,type:"strength / mobility",desc:"Sit with a towel under your foot. Scrunch it toward you with your toes, flatten it, and repeat.",tip:"Keep the rest of your foot in contact with the ground."},
+{name:"Toe Yoga — Alternating Great and Lesser Toe Extension",sets:2,seconds:120,type:"strength / mobility",desc:"With your foot bare and flat, alternate lifting the big toe while the others stay down, then the four smaller toes while the big toe stays down.",tip:"Keep the arch active and avoid digging your toes into the ground."},
+{name:"Toe Spreading",sets:2,seconds:120,type:"strength / mobility",desc:"Stand with feet shoulder-width apart and gently spread your toes while keeping the foot grounded.",tip:"Keep the foot in contact with the ground."},
+{name:"Seated Plantar Fascia Stretch",sets:3,seconds:30,type:"stretch",desc:"Sit with one leg crossed over the other knee. Hold your heel and toes, then gently pull the toes backward.",tip:"Keep the stretch slow and controlled."},
+{name:"Seated Plantar Fascia Mobilization with Small Ball",sets:2,seconds:120,type:"mobility",desc:"Sit with your foot on a small ball. Gently roll the middle of your foot forward and backward between the ball of the foot and heel.",tip:"Use enough pressure to feel a stretch, not pain."}
 ];
 
-const STORAGE="footRehab";
-const todayKey=new Date().toISOString().slice(0,10);
-let data=JSON.parse(localStorage.getItem(STORAGE)||"null");
-if(!data||data.date!==todayKey){
-  // Preserve prior history if an older version had a current-day record.
-  const priorHistory=data?.history||[];
-  data={date:todayKey,sessions:[],current:null,history:priorHistory};
-}
-data.history=data.history||[];
-let current=data.current||fresh();
-let timers=Array(8).fill(null),remaining=Array(8).fill(null);
+const KEY="footRehab";
+const dateKey=new Date().toISOString().slice(0,10);
+const $=id=>document.getElementById(id);
 
-function fresh(){return {done:Array(8).fill(false),ice:false,before:"",after:"",notes:""}}
-function save(){data.current=current;localStorage.setItem(STORAGE,JSON.stringify(data))}
-function fmt(s){return s<60?String(s):Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
-function avg(values){if(!values.length)return "—";return (values.reduce((a,b)=>a+b,0)/values.length).toFixed(1)}
-function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function emptySession(){return {done:Array(EXERCISES.length).fill(false),ice:false,before:"",after:"",notes:""}}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    const parsed=raw?JSON.parse(raw):null;
+    if(parsed && parsed.date===dateKey){
+      return {date:dateKey,sessions:Array.isArray(parsed.sessions)?parsed.sessions:[],history:Array.isArray(parsed.history)?parsed.history:[],current:parsed.current||emptySession()};
+    }
+    return {date:dateKey,sessions:[],history:parsed&&Array.isArray(parsed.history)?parsed.history:[],current:emptySession()};
+  }catch(e){return {date:dateKey,sessions:[],history:[],current:emptySession()}}
+}
+let data=load();
+let timers=Array(EXERCISES.length).fill(null);
+let remaining=Array(EXERCISES.length).fill(null);
+
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+function fmt(sec){return sec<60?String(sec):Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0")}
+function avg(values){return values.length?(values.reduce((a,b)=>a+b,0)/values.length).toFixed(1):"—"}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
 function render(){
-  const n=data.sessions.length;
-  document.getElementById("date").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
-  document.getElementById("count").textContent=n+" / 3";
-  document.getElementById("session").textContent=n>=3?"Daily target reached":"Session "+(n+1)+" of 3";
-  document.getElementById("goal").textContent=n===0?"Minimum goal: 1 session today. PT target: 2–3 sessions.":n===1?"Daily minimum met. A second session moves you toward your PT target.":n===2?"2 sessions done — one more reaches the top of your prescribed range.":"PT target reached for today.";
-  for(let i=1;i<=3;i++)document.getElementById("d"+i).className="dot"+(i<=n?" on":"");
+  const n=Math.min(3,data.sessions.length);
+  $("date").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"});
+  $("count").textContent=n+" / 3";
+  $("session").textContent=n>=3?"Daily target reached":"Session "+(n+1)+" of 3";
+  $("goal").textContent=n===0?"Minimum goal: 1 session today. PT target: 2–3 sessions.":n===1?"Daily minimum met. A second session moves you toward your PT target.":n===2?"2 sessions done — one more reaches the top of your prescribed range.":"PT target reached for today.";
+  for(let i=1;i<=3;i++)$("d"+i).className="dot"+(i<=n?" on":"");
 
-  document.getElementById("list").innerHTML=exercises.map((e,i)=>`<article class="card exercise ${current.done[i]?"done":""}">
-    <button class="check" data-check="${i}" aria-pressed="${current.done[i]}">${current.done[i]?"✓":"○"}</button>
-    <div style="min-width:0;flex:1"><div class="name">${e[0]}</div>
-    <div class="muted">${e[1]} sets × ${e[2]>=60?e[2]/60+" min":e[2]+" sec"} <span class="pill">${e[3]}</span></div>
-    <div class="desc">${e[4]}</div><div class="tip"><strong>Tip:</strong> ${e[5]}</div>
-    <div class="actions"><button class="timerbtn" data-timer="${i}">${timers[i]?"Pause timer":"Start timer"}</button><span class="timer">${remaining[i]!==null?fmt(remaining[i]):fmt(e[2])}</span><span class="muted">per set</span></div></div></article>`).join("");
+  $("list").innerHTML=EXERCISES.map((e,i)=>`
+  <article class="card exercise ${data.current.done[i]?"done":""}">
+    <button class="check" type="button" data-check="${i}" aria-pressed="${data.current.done[i]}">${data.current.done[i]?"✓":"○"}</button>
+    <div style="min-width:0;flex:1">
+      <div class="name">${esc(e.name)}</div>
+      <div class="muted">${e.sets} sets × ${e.seconds>=60?e.seconds/60+" min":e.seconds+" sec"} <span class="pill">${esc(e.type)}</span></div>
+      <div class="desc">${esc(e.desc)}</div>
+      <div class="tip"><strong>Tip:</strong> ${esc(e.tip)}</div>
+      <div class="actions"><button class="timerbtn" type="button" data-timer="${i}">${timers[i]?"Pause timer":"Start timer"}</button><span class="timer">${remaining[i]!==null?fmt(remaining[i]):fmt(e.seconds)}</span><span class="muted">per set</span></div>
+    </div>
+  </article>`).join("");
 
-  document.querySelectorAll("[data-check]").forEach(b=>b.onclick=()=>{current.done[+b.dataset.check]=!current.done[+b.dataset.check];save();render()});
-  document.querySelectorAll("[data-timer]").forEach(b=>b.onclick=()=>toggleTimer(+b.dataset.timer));
-  document.getElementById("ice").textContent=current.ice?"✓":"○";
-  document.getElementById("ice").setAttribute("aria-pressed",String(current.ice));
-  document.getElementById("before").value=current.before;
-  document.getElementById("after").value=current.after;
-  document.getElementById("notes").value=current.notes;
+  document.querySelectorAll("[data-check]").forEach(btn=>btn.addEventListener("click",function(){const i=Number(this.dataset.check);data.current.done[i]=!data.current.done[i];save();render()}));
+  document.querySelectorAll("[data-timer]").forEach(btn=>btn.addEventListener("click",function(){toggleTimer(Number(this.dataset.timer))}));
+  $("ice").textContent=data.current.ice?"✓":"○";
+  $("ice").setAttribute("aria-pressed",String(data.current.ice));
+  $("before").value=data.current.before;
+  $("after").value=data.current.after;
+  $("notes").value=data.current.notes;
   renderHistory();
 }
-function renderHistory(){
-  const sessions=data.history.slice().reverse();
-  const last7=sessions.slice(0,7);
-  const painsBefore=last7.map(s=>Number(s.before)).filter(Number.isFinite);
-  const painsAfter=last7.map(s=>Number(s.after)).filter(Number.isFinite);
-  const avgBefore=avg(painsBefore),avgAfter=avg(painsAfter);
-  document.getElementById("summary").innerHTML=
-    `<div class="stat"><strong>${last7.length}</strong><span class="muted">sessions logged</span></div>
-     <div class="stat"><strong>${avgBefore}</strong><span class="muted">avg pain before</span></div>
-     <div class="stat"><strong>${avgAfter}</strong><span class="muted">avg pain after</span></div>`;
-  document.getElementById("history").innerHTML=sessions.length?sessions.slice(0,20).map(s=>{
-    const d=new Date(s.finishedAt);
-    const date=d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
-    const pain=(s.before!==""||s.after!=="")?`Pain ${s.before||"—"} → ${s.after||"—"}`:"Pain not recorded";
-    const optional=s.ice?" · Ice/roll":"";
-    const note=s.notes?`<div class="history-meta">${escapeHtml(s.notes)}</div>`:"";
-    return `<div class="history-row"><div class="history-date">${date}</div><div class="history-meta">${pain}${optional}</div>${note}</div>`;
-  }).join(""):`<div class="muted" style="margin-top:8px">No completed sessions yet. Your history will appear here.</div>`;
-}
+
 function toggleTimer(i){
   if(timers[i]){clearInterval(timers[i]);timers[i]=null;render();return}
-  if(remaining[i]===null)remaining[i]=exercises[i][2];
-  timers[i]=setInterval(()=>{
-    remaining[i]--;
-    if(remaining[i]<=0){clearInterval(timers[i]);timers[i]=null;remaining[i]=null;current.done[i]=true;save()}
-    render()
-  },1000);render()
+  if(remaining[i]===null)remaining[i]=EXERCISES[i].seconds;
+  timers[i]=setInterval(function(){
+    remaining[i]-=1;
+    if(remaining[i]<=0){
+      clearInterval(timers[i]);timers[i]=null;remaining[i]=null;data.current.done[i]=true;save();
+    }
+    render();
+  },1000);
+  render();
 }
 
-document.getElementById("ice").onclick=()=>{current.ice=!current.ice;save();render()};
-["before","after","notes"].forEach(id=>document.getElementById(id).addEventListener("input",e=>{
-  if(id!=="notes"){if(e.target.value===""){current[id]="";save();return}let v=Number(e.target.value);if(!Number.isFinite(v))e.target.value="";else{e.target.value=String(Math.max(0,Math.min(10,v)));current[id]=e.target.value;save()}}
-  else{current[id]=e.target.value;save()}
+function renderHistory(){
+  const all=data.history.slice().reverse();
+  const recent=all.slice(0,7);
+  const before=recent.map(s=>Number(s.before)).filter(Number.isFinite);
+  const after=recent.map(s=>Number(s.after)).filter(Number.isFinite);
+  $("summary").innerHTML=`<div class="stat"><strong>${recent.length}</strong><span class="muted">sessions logged</span></div><div class="stat"><strong>${avg(before)}</strong><span class="muted">avg pain before</span></div><div class="stat"><strong>${avg(after)}</strong><span class="muted">avg pain after</span></div>`;
+  $("history").innerHTML=all.length?all.slice(0,20).map(s=>{
+    const d=new Date(s.finishedAt);
+    const date=d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+    const pain=(s.before!==""||s.after!=="")?"Pain "+(s.before||"—")+" → "+(s.after||"—"):"Pain not recorded";
+    const extra=s.ice?" · Ice/roll":"";
+    return `<div class="history-row"><div class="history-date">${date}</div><div class="history-meta">${pain}${extra}</div>${s.notes?`<div class="history-meta">${esc(s.notes)}</div>`:""}</div>`;
+  }).join(""):"<div class=\"muted\" style=\"margin-top:8px\">No completed sessions yet.</div>";
+}
+
+$("ice").addEventListener("click",function(){data.current.ice=!data.current.ice;save();render()});
+["before","after"].forEach(id=>$ (id).addEventListener("input",function(){
+  if(this.value===""){data.current[id]="";save();return}
+  const n=Number(this.value);
+  if(!Number.isFinite(n)){this.value="";return}
+  const v=Math.max(0,Math.min(10,Math.round(n)));
+  this.value=String(v);data.current[id]=String(v);save();
 }));
-document.getElementById("reset").onclick=()=>{
-  timers.forEach(t=>t&&clearInterval(t));timers=Array(8).fill(null);remaining=Array(8).fill(null);
-  current=fresh();save();document.getElementById("status").textContent="Session reset.";render()
-};
-document.getElementById("finish").onclick=()=>{
-  if(!current.done.every(Boolean)){document.getElementById("status").textContent="You can finish even if you stopped before completing every exercise.";return}
-  const finished={...current,finishedAt:new Date().toISOString()};
+$("notes").addEventListener("input",function(){data.current.notes=this.value;save()});
+
+$("reset").addEventListener("click",function(){
+  timers.forEach(t=>{if(t)clearInterval(t)});timers=Array(EXERCISES.length).fill(null);remaining=Array(EXERCISES.length).fill(null);
+  data.current=emptySession();save();$("status").textContent="Session reset.";render();
+});
+
+$("finish").addEventListener("click",function(){
+  if(!data.current.done.every(Boolean)){
+    $("status").textContent="You can finish even if you stopped before completing every exercise.";return;
+  }
+  const finished={...data.current,finishedAt:new Date().toISOString()};
   data.sessions.push(finished);data.sessions=data.sessions.slice(-3);
   data.history.push(finished);data.history=data.history.slice(-200);
-  current=fresh();save();
-  document.getElementById("status").textContent=data.sessions.length<3?"Session recorded. Your next session is ready.":"Session recorded. You reached the top of your prescribed daily range.";
-  render()
-};
+  data.current=emptySession();save();
+  $("status").textContent=data.sessions.length<3?"Session recorded. Your next session is ready.":"Session recorded. You reached the top of your prescribed daily range.";
+  render();
+});
 
-document.getElementById("export").onclick=()=>{
-  const backup={exportedAt:new Date().toISOString(),data};
+$("export").addEventListener("click",function(){
+  const backup={app:"Foot Rehab Tracker",exportedAt:new Date().toISOString(),data:data};
   const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="foot-rehab-backup-"+todayKey+".json";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
+  const link=document.createElement("a");
+  link.href=url;link.download="foot-rehab-backup-"+dateKey+".json";
+  document.body.appendChild(link);link.click();link.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1000);
-  document.getElementById("status").textContent="Backup exported. Keep the JSON file somewhere safe.";
-};
+  $("status").textContent="Backup exported.";
+});
 
-document.getElementById("todayTab").onclick=()=>{
-  document.getElementById("todayView").style.display="";
-  document.getElementById("historyView").style.display="none";
-  document.getElementById("todayTab").className="primary";document.getElementById("historyTab").className="secondary";
-};
-document.getElementById("historyTab").onclick=()=>{
-  document.getElementById("todayView").style.display="none";
-  document.getElementById("historyView").style.display="";
-  document.getElementById("todayTab").className="secondary";document.getElementById("historyTab").className="primary";
-  renderHistory()
-};
+$("todayTab").addEventListener("click",function(){
+  $("todayView").style.display="";$("historyView").style.display="none";$("todayTab").className="primary";$("historyTab").className="secondary";
+});
+$("historyTab").addEventListener("click",function(){
+  $("todayView").style.display="none";$("historyView").style.display="";$("todayTab").className="secondary";$("historyTab").className="primary";renderHistory();
+});
 
 render();
+})();
 </script>
 </body>
 </html>
