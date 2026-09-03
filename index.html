@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="foot-rehab-icon-180.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5f1ea">
@@ -78,7 +78,8 @@ const EXERCISES=[
 ];
 
 const KEY="footRehab";
-const dateKey=new Date().toISOString().slice(0,10);
+function localDateKey(d=new Date()){const y=d.getFullYear();const m=String(d.getMonth()+1).padStart(2,"0");const day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`}
+const dateKey=localDateKey();
 const $=id=>document.getElementById(id);
 
 function emptySession(){return {done:Array(EXERCISES.length).fill(false),ice:false,before:"",after:"",notes:""}}
@@ -86,10 +87,12 @@ function load(){
   try{
     const raw=localStorage.getItem(KEY);
     const parsed=raw?JSON.parse(raw):null;
+    const history=parsed&&Array.isArray(parsed.history)?parsed.history:[];
     if(parsed && parsed.date===dateKey){
-      return {date:dateKey,sessions:Array.isArray(parsed.sessions)?parsed.sessions:[],history:Array.isArray(parsed.history)?parsed.history:[],current:parsed.current||emptySession()};
+      const todaysHistory=history.filter(s=>s&&s.finishedAt&&localDateKey(new Date(s.finishedAt))===dateKey).slice(-3);
+      return {date:dateKey,sessions:todaysHistory,history,current:parsed.current||emptySession()};
     }
-    return {date:dateKey,sessions:[],history:parsed&&Array.isArray(parsed.history)?parsed.history:[],current:emptySession()};
+    return {date:dateKey,sessions:[],history,current:emptySession()};
   }catch(e){return {date:dateKey,sessions:[],history:[],current:emptySession()}}
 }
 let data=load();
@@ -155,7 +158,8 @@ function renderHistory(){
     const date=d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
     const pain=(s.before!==""||s.after!=="")?"Pain "+(s.before||"—")+" → "+(s.after||"—"):"Pain not recorded";
     const extra=s.ice?" · Ice/roll":"";
-    return `<div class="history-row"><div class="history-date">${date}</div><div class="history-meta">${pain}${extra}</div>${s.notes?`<div class="history-meta">${esc(s.notes)}</div>`:""}</div>`;
+    const exerciseCount=`${Number.isFinite(Number(s.completedExercises))?Number(s.completedExercises):s.done?s.done.filter(Boolean).length:0}/${s.totalExercises||EXERCISES.length} exercises completed`;
+    return `<div class="history-row"><div class="history-date">${date}</div><div class="history-meta">${exerciseCount}</div><div class="history-meta">${pain}${extra}</div>${s.notes?`<div class="history-meta">${esc(s.notes)}</div>`:""}</div>`;
   }).join(""):"<div class=\"muted\" style=\"margin-top:8px\">No completed sessions yet.</div>";
 }
 
@@ -181,9 +185,10 @@ $("finish").addEventListener("click",function(){
   data.history.push(finished);data.history=data.history.slice(-200);
   timers.forEach(t=>{if(t)clearInterval(t)});timers=Array(EXERCISES.length).fill(null);remaining=Array(EXERCISES.length).fill(null);
   data.current=emptySession();save();
+  const sessionCount=data.sessions.length;
   $("status").textContent=completed===EXERCISES.length
-    ?(data.sessions.length<3?"Session recorded. Your next session is ready.":"Session recorded. You reached the top of your prescribed daily range.")
-    :`Session recorded — ${completed} of ${EXERCISES.length} exercises completed. Your next session is ready.`;
+    ?`Session recorded — ${completed}/${EXERCISES.length} exercises completed. You've completed ${sessionCount} session${sessionCount===1?"":"s"} today.`
+    :`Session recorded — ${completed}/${EXERCISES.length} exercises completed. You've completed ${sessionCount} session${sessionCount===1?"":"s"} today.`;
   render();
 });
 
