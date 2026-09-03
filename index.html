@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="apple-touch-icon" sizes="180x180" href="foot-rehab-icon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="foot-icon-180.png">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f5f1ea">
@@ -34,25 +34,34 @@ main{max-width:720px;margin:auto;padding:20px 16px 40px}.card{background:var(--c
 <div id="list"></div>
 
 <section class="card">
+<div class="section-title">Pain before</div>
+<div class="muted">Rate your foot pain before starting this session.</div>
+<div class="field" style="margin-top:12px"><input id="before" type="number" min="0" max="10" step="1" placeholder="0–10" aria-label="Pain before"></div>
+</section>
+
+
+
+<section class="card">
 <div class="optional"><button id="ice" class="secondary" type="button" aria-pressed="false">○</button><div><div class="section-title">Optional: ice / frozen bottle</div><div class="muted">Last step. Ice your feet or gently roll a frozen water bottle under your feet.</div></div></div>
 </section>
 
 <section class="card">
-<div class="section-title">How does your foot feel?</div><div class="muted">Rate pain at the end of the session.</div>
-<div class="fields" style="margin-top:12px">
-<div class="field"><label for="before">Pain before</label><input id="before" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
-<div class="field"><label for="after">Pain after</label><input id="after" type="number" min="0" max="10" step="1" placeholder="0–10"></div>
-</div>
+<div class="section-title">Session notes</div>
+<div class="muted">Anything you want to remember about this session.</div>
+<div class="field" style="margin-top:12px"><textarea id="notes" rows="3" placeholder="Optional notes"></textarea></div>
 </section>
 
 <section class="card">
-<div class="section-title">Session notes</div><div class="field"><textarea id="notes" rows="3" placeholder="Anything worth remembering?"></textarea></div>
-<div class="actions"><button id="finish" class="primary" type="button">Finish session</button><button id="reset" class="secondary" type="button">Reset session</button><button id="export" class="secondary" type="button">Export data</button></div>
+<div class="section-title">Pain after</div>
+<div class="muted">Rate your foot pain after completing or stopping this session.</div>
+<div class="field" style="margin-top:12px"><input id="after" type="number" min="0" max="10" step="1" placeholder="0–10" aria-label="Pain after"></div>
+<div class="actions">
+<button id="finish" class="primary" type="button">Finish session</button>
+<button id="reset" class="secondary" type="button">Reset session</button>
+<button id="export" class="secondary" type="button">Export data</button>
+</div>
 <div id="status" class="status muted" aria-live="polite"></div>
 </section>
-
-<section class="card"><div class="section-title">Your prescription</div><div class="muted" style="margin-top:8px">Stretches: 3 × 30 sec · Other exercises: 1–2 × 2 min · Frequency: 2–3× daily</div></section>
-</div>
 
 <div id="historyView" style="display:none">
 <section class="card"><div class="section-title">Progress</div><div id="summary" class="stats"></div></section>
