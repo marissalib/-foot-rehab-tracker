@@ -31,3 +31,7 @@ This tracker does not replace your PT's instructions.
 
 BACKUP
 Use the Export data button about once a week or whenever you remember. It downloads a JSON backup of your current history. Keep the file somewhere safe. The app does not currently include an import/restore button; if you ever need to restore data, the backup can be used to rebuild the local data.
+
+
+SERVICE WORKER NOTE
+The current version intentionally does not use a service worker. This keeps development updates simple and avoids stale app-shell caching while the app is being iterated on. The manifest remains available for Home Screen installation.
