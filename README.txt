@@ -143,12 +143,6 @@ The Home Screen icon is supplied as a full-bleed image so that iOS can apply its
 
 ---
 
-## Icon note
-
-The Home Screen icon uses an opaque full-bleed background so iOS can apply its own rounded-square mask without creating a black or white border.
-
----
-
 ## Technical notes
 
 This is intentionally a simple application.
