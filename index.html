@@ -175,14 +175,15 @@ $("reset").addEventListener("click",function(){
 });
 
 $("finish").addEventListener("click",function(){
-  if(!data.current.done.every(Boolean)){
-    $("status").textContent="You can finish even if you stopped before completing every exercise.";return;
-  }
-  const finished={...data.current,finishedAt:new Date().toISOString()};
+  const completed=data.current.done.filter(Boolean).length;
+  const finished={...data.current,finishedAt:new Date().toISOString(),completedExercises:completed,totalExercises:EXERCISES.length};
   data.sessions.push(finished);data.sessions=data.sessions.slice(-3);
   data.history.push(finished);data.history=data.history.slice(-200);
+  timers.forEach(t=>{if(t)clearInterval(t)});timers=Array(EXERCISES.length).fill(null);remaining=Array(EXERCISES.length).fill(null);
   data.current=emptySession();save();
-  $("status").textContent=data.sessions.length<3?"Session recorded. Your next session is ready.":"Session recorded. You reached the top of your prescribed daily range.";
+  $("status").textContent=completed===EXERCISES.length
+    ?(data.sessions.length<3?"Session recorded. Your next session is ready.":"Session recorded. You reached the top of your prescribed daily range.")
+    :`Session recorded — ${completed} of ${EXERCISES.length} exercises completed. Your next session is ready.`;
   render();
 });
 
